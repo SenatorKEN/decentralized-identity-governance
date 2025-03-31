@@ -289,3 +289,21 @@
     expiration-height: uint
   }
 )
+
+;; Escrow system for conditional transactions
+(define-map escrow-deposits
+  uint ;; escrow-id
+  {
+    depositor: principal,
+    recipient: principal,
+    amount: uint,
+    lock-until: uint,
+    condition-type: (string-utf8 30),
+    condition-params: (list 3 {
+      param-name: (string-utf8 30),
+      param-value: (string-utf8 100)
+    }),
+    status: (string-utf8 20)
+  }
+)
+
