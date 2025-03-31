@@ -10,6 +10,11 @@
 (define-constant ERR-VOTING-PERIOD-CLOSED (err u105))
 (define-constant ERR-DUPLICATE-VOTE (err u106))
 (define-constant ERR-PROPOSAL-NOT-FOUND (err u107))
+(define-constant ERR-INVALID-PARAMETER (err u108))
+(define-constant ERR-CREDENTIAL-EXPIRED (err u109))
+(define-constant ERR-RATE-LIMIT-EXCEEDED (err u110))
+(define-constant ERR-CONTRACT-PAUSED (err u111))
+(define-constant ERR-THRESHOLD-NOT-MET (err u112))
 
 ;; Identity Verification Levels
 (define-constant IDENTITY-UNVERIFIED u0)
@@ -23,6 +28,12 @@
 (define-constant PROPOSAL-PASSED u2)
 (define-constant PROPOSAL-REJECTED u3)
 
+;; NEW CONTRACT STATE VARIABLES
+(define-data-var contract-paused bool false)
+(define-data-var admin-address principal CONTRACT-OWNER)
+(define-data-var fee-basis-points uint u50)  ;; 0.5% default fee
+(define-data-var protocol-treasury principal CONTRACT-OWNER)
+(define-data-var min-voting-threshold uint u100)  ;; Minimum votes required
 ;; Comprehensive Identity Structure
 (define-map identity-profiles
   principal
@@ -73,7 +84,6 @@
 (define-read-only (get-identity-profile (subject principal))
   (map-get? identity-profiles subject)
 )
-
 
 
 (define-read-only (get-credential-issuer-reputation (issuer principal))
