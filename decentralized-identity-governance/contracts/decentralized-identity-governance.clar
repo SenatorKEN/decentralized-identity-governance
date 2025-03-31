@@ -319,13 +319,17 @@
   }
 )
 
-;; Read-only Functions for Retrieving Information
-(define-read-only (get-identity-profile (subject principal))
-  (map-get? identity-profiles subject)
-)
-
-(define-read-only (get-credential-issuer-reputation (issuer principal))
-  (map-get? credential-issuer-reputation issuer)
+;; Enhanced voting with quadratic voting and delegation
+(define-map enhanced-votes
+  { proposal-id: uint, voter: principal }
+  {
+    vote-type: bool,
+    weight: uint,
+    timestamp: uint,
+    delegated-from: (optional principal),
+    conviction: uint, ;; increases with time
+    rationale: (optional (string-utf8 200))
+  }
 )
 
 
