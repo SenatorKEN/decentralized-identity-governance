@@ -249,3 +249,17 @@
     }
   }
 )
+
+;; Delegated authority system
+(define-map delegations
+  { delegator: principal, action-type: (string-utf8 30) }
+  {
+    delegate: principal,
+    restrictions: (list 5 {
+      restriction-type: (string-utf8 30),
+      restriction-value: (string-utf8 100)
+    }),
+    expiration: uint,
+    revocable: bool
+  }
+)
