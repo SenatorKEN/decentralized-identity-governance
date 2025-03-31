@@ -347,3 +347,45 @@
   }
 )
 
+;; Protocol upgrade proposals with more detailed implementation stages
+(define-map protocol-upgrades
+  uint
+  {
+    proposal-id: uint,
+    code-repository: (string-utf8 200),
+    commit-hash: (buff 32),
+    security-audit-status: (string-utf8 30),
+    implementation-stages: (list 5 {
+      stage-name: (string-utf8 50),
+      status: (string-utf8 20),
+      target-block-height: uint
+    }),
+    backward-compatible: bool,
+    emergency-level: uint
+  }
+)
+
+(define-read-only (get-enhanced-vote (proposal-id uint) (voter principal))
+  (map-get? enhanced-votes { proposal-id: proposal-id, voter: voter })
+)
+
+
+(define-read-only (get-staking-position (user principal))
+  (map-get? staking-positions user)
+)
+
+
+(define-read-only (get-protocol-upgrade (upgrade-id uint))
+  (map-get? protocol-upgrades upgrade-id)
+)
+
+
+(define-read-only (calculate-governance-power (user principal))
+  (let ((staking-info (default-to
+        { amount: u0, locked-until: u0, boost-factor: u100, delegation-preferences: (list) }
+        (map-get? staking-positions user))))
+    ;; Calculate power based on stake amount and boost factor
+    (/ (* (get amount staking-info) (get boost-factor staking-info)) u100)
+  )
+)
+
