@@ -10,3 +10,15 @@
 (define-constant ERR-VOTING-PERIOD-CLOSED (err u105))
 (define-constant ERR-DUPLICATE-VOTE (err u106))
 (define-constant ERR-PROPOSAL-NOT-FOUND (err u107))
+
+;; Identity Verification Levels
+(define-constant IDENTITY-UNVERIFIED u0)
+(define-constant IDENTITY-BASIC u1)
+(define-constant IDENTITY-INTERMEDIATE u2)
+(define-constant IDENTITY-ADVANCED u3)
+
+;; Governance Proposal States
+(define-constant PROPOSAL-DRAFT u0)
+(define-constant PROPOSAL-ACTIVE u1)
+(define-constant PROPOSAL-PASSED u2)
+(define-constant PROPOSAL-REJECTED u3)
