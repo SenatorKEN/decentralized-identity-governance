@@ -155,3 +155,15 @@
 (define-read-only (get-vote (proposal-id uint) (voter principal))
   (map-get? votes { proposal-id: proposal-id, voter: voter })
 )
+
+(define-read-only (get-contract-admin)
+  (var-get admin-address)
+)
+
+(define-read-only (is-contract-paused)
+  (var-get contract-paused)
+)
+
+(define-read-only (get-fee-basis-points)
+  (var-get fee-basis-points)
+)
