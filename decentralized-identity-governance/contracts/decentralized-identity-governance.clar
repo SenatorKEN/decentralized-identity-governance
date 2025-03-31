@@ -167,3 +167,15 @@
 (define-read-only (get-fee-basis-points)
   (var-get fee-basis-points)
 )
+
+(define-read-only (get-feature-status (feature-name (string-utf8 50)))
+  (map-get? feature-flags feature-name)
+)
+
+(define-read-only (check-rate-limit (user principal))
+  (let ((user-limits (default-to 
+    { last-action-time: u0, action-count: u0, timeout-until: u0 } 
+    (map-get? rate-limits user))))
+    (< (get timeout-until user-limits) stacks-block-height)
+  )
+)
