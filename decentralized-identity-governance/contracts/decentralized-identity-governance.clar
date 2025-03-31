@@ -364,4 +364,14 @@
   }
 )
 
+(define-read-only (get-enhanced-vote (proposal-id uint) (voter principal))
+  (map-get? enhanced-votes { proposal-id: proposal-id, voter: voter })
+)
 
+(define-read-only (get-staking-position (user principal))
+  (map-get? staking-positions user)
+)
+
+(define-read-only (get-protocol-upgrade (upgrade-id uint))
+  (map-get? protocol-upgrades upgrade-id)
+)
