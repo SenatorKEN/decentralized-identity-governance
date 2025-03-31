@@ -307,3 +307,29 @@
   }
 )
 
+;; Oracle data feeds
+(define-map oracle-data
+  (string-utf8 30) ;; data-feed-id
+  {
+    value: (string-utf8 100),
+    source: principal,
+    last-updated: uint,
+    signature: (buff 64),
+    confidence-score: uint
+  }
+)
+
+
+;; Enhanced voting with quadratic voting and delegation
+(define-map enhanced-votes
+  { proposal-id: uint, voter: principal }
+  {
+    vote-type: bool,
+    weight: uint,
+    timestamp: uint,
+    delegated-from: (optional principal),
+    conviction: uint, ;; increases with time
+    rationale: (optional (string-utf8 200))
+  }
+)
+
