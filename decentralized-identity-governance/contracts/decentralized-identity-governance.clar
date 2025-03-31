@@ -179,3 +179,32 @@
     (< (get timeout-until user-limits) stacks-block-height)
   )
 )
+
+
+(define-private (is-contract-owner)
+  (is-eq tx-sender CONTRACT-OWNER)
+)
+
+(define-private (is-admin (address principal))
+  (or (is-eq address CONTRACT-OWNER) (is-eq address (var-get admin-address)))
+)
+
+(define-private (update-rate-limit (user principal))
+  (let ((current-limits (default-to 
+        { last-action-time: u0, action-count: u0, timeout-until: u0 } 
+        (map-get? rate-limits user)))
+        (current-block stacks-block-height))
+    (if (is-eq (get last-action-time current-limits) current-block)
+      (let ((new-count (+ u1 (get action-count current-limits))))
+        (map-set rate-limits user
+          (merge current-limits {
+            action-count: new-count,
+            timeout-until: (if (> new-count u5)
+                            (+ current-block u10)
+                            (get timeout-until current-limits))
+          })))
+      (map-set rate-limits user
+        { last-action-time: current-block, action-count: u1, timeout-until: u0 })
+    )
+  )
+)
