@@ -333,3 +333,17 @@
   }
 )
 
+;; Staking registry for governance weight
+(define-map staking-positions
+  principal
+  {
+    amount: uint,
+    locked-until: uint,
+    boost-factor: uint,
+    delegation-preferences: (list 5 {
+      delegate: principal,
+      percentage: uint
+    })
+  }
+)
+
