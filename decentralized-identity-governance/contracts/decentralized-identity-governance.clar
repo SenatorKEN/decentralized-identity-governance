@@ -34,6 +34,7 @@
 (define-data-var fee-basis-points uint u50)  ;; 0.5% default fee
 (define-data-var protocol-treasury principal CONTRACT-OWNER)
 (define-data-var min-voting-threshold uint u100)  ;; Minimum votes required
+
 ;; Comprehensive Identity Structure
 (define-map identity-profiles
   principal
@@ -90,3 +91,23 @@
   (map-get? credential-issuer-reputation issuer)
 )
 
+;; Governance Proposals
+(define-map governance-proposals
+  uint
+  {
+    id: uint,
+    title: (string-utf8 100),
+    description: (string-utf8 500),
+    proposer: principal,
+    start-block-height: uint,
+    end-block-height: uint,
+    status: uint,
+    yes-votes: uint,
+    no-votes: uint,
+    executed: bool,
+    execution-params: (list 5 {
+      param-name: (string-utf8 50),
+      param-value: (string-utf8 100)
+    })
+  }
+)
