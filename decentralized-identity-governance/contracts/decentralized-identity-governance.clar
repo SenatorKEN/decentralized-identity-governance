@@ -16,6 +16,14 @@
 (define-constant ERR-CONTRACT-PAUSED (err u111))
 (define-constant ERR-THRESHOLD-NOT-MET (err u112))
 
+(define-constant ERR-IDENTITY-ALREADY-EXISTS (err u113))
+(define-constant ERR-MAX-CREDENTIALS-REACHED (err u114))
+(define-constant ERR-SIGNATURE-INVALID (err u115))
+(define-constant ERR-DELEGATION-NOT-FOUND (err u116))
+(define-constant ERR-MULTISIG-THRESHOLD-NOT-MET (err u117))
+(define-constant ERR-ESCROW-LOCKED (err u118))
+(define-constant ERR-ORACLE-DATA-UNAVAILABLE (err u119))
+
 ;; Identity Verification Levels
 (define-constant IDENTITY-UNVERIFIED u0)
 (define-constant IDENTITY-BASIC u1)
@@ -208,3 +216,10 @@
     )
   )
 )
+
+(define-constant IDENTITY-ENTERPRISE u4)
+(define-constant IDENTITY-GUARDIAN u5)
+
+(define-constant PROPOSAL-PENDING-REVIEW u4)
+(define-constant PROPOSAL-IMPLEMENTATION u5)
+(define-constant PROPOSAL-CANCELLED u6)
