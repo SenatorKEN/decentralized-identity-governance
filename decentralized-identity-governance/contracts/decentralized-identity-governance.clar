@@ -223,3 +223,8 @@
 (define-constant PROPOSAL-PENDING-REVIEW u4)
 (define-constant PROPOSAL-IMPLEMENTATION u5)
 (define-constant PROPOSAL-CANCELLED u6)
+
+(define-data-var protocol-upgrade-timelock uint u1440) ;; 24 hours in blocks
+(define-data-var emergency-mode bool false)
+(define-data-var guardian-multisig-threshold uint u3) ;; Require 3 guardians for emergency actions
+(define-data-var oracle-update-frequency uint u144) ;; Update every ~24 hours (assuming 10 min blocks)
