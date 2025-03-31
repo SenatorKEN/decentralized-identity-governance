@@ -127,3 +127,23 @@
     metadata: (optional (string-utf8 200))
   }
 )
+
+;; Rate Limiting
+(define-map rate-limits
+  principal
+  {
+    last-action-time: uint,
+    action-count: uint,
+    timeout-until: uint
+  }
+)
+
+;; Feature Flags
+(define-map feature-flags
+  (string-utf8 50)
+  {
+    enabled: bool,
+    admin-only: bool,
+    min-identity-level: uint
+  }
+)
