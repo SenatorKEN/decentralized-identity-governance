@@ -147,3 +147,11 @@
     min-identity-level: uint
   }
 )
+
+(define-read-only (get-proposal (proposal-id uint))
+  (map-get? governance-proposals proposal-id)
+)
+
+(define-read-only (get-vote (proposal-id uint) (voter principal))
+  (map-get? votes { proposal-id: proposal-id, voter: voter })
+)
