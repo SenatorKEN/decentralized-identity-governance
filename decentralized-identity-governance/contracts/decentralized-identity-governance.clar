@@ -111,3 +111,19 @@
     })
   }
 )
+
+;; Vote Registry
+(define-map votes
+  { proposal-id: uint, voter: principal }
+  { vote-type: bool, weight: uint, timestamp: uint }
+)
+
+;; Activity Log
+(define-map activity-log
+  { user: principal, action-id: uint }
+  {
+    action-type: (string-utf8 50),
+    timestamp: uint,
+    metadata: (optional (string-utf8 200))
+  }
+)
