@@ -58,3 +58,13 @@
   }
 )
 
+;; Credential Issuer Reputation
+(define-map credential-issuer-reputation
+  principal
+  {
+    total-credentials-issued: uint,
+    valid-credentials: uint,
+    revoked-credentials: uint,
+    reputation-score: uint
+  }
+)
