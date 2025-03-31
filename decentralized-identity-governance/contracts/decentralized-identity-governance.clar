@@ -319,5 +319,14 @@
   }
 )
 
+;; Read-only Functions for Retrieving Information
+(define-read-only (get-identity-profile (subject principal))
+  (map-get? identity-profiles subject)
+)
+
+(define-read-only (get-credential-issuer-reputation (issuer principal))
+  (map-get? credential-issuer-reputation issuer)
+)
+
 
 
