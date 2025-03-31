@@ -384,3 +384,19 @@
     (/ (* (get amount staking-info) (get boost-factor staking-info)) u100)
   )
 )
+
+(define-private (validate-signature (message (buff 128)) (signature (buff 64)) (signer principal))
+  ;; Placeholder for signature validation logic
+  ;; In a real contract this would use cryptographic primitives
+  (is-eq (hash160 message) (hash160 signature))
+)
+
+(define-private (check-delegation-authority (delegator principal) (action-type (string-utf8 30)))
+  (let ((delegation (map-get? delegations { delegator: delegator, action-type: action-type })))
+    (if (and (is-some delegation) 
+             (is-eq tx-sender (get delegate (unwrap-panic delegation))) 
+             (> (get expiration (unwrap-panic delegation)) stacks-block-height))
+      true
+      false)
+  )
+)
