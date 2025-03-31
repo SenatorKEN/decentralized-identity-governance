@@ -375,3 +375,12 @@
 (define-read-only (get-protocol-upgrade (upgrade-id uint))
   (map-get? protocol-upgrades upgrade-id)
 )
+
+(define-read-only (calculate-governance-power (user principal))
+  (let ((staking-info (default-to 
+        { amount: u0, locked-until: u0, boost-factor: u100, delegation-preferences: (list) } 
+        (map-get? staking-positions user))))
+    ;; Calculate power based on stake amount and boost factor
+    (/ (* (get amount staking-info) (get boost-factor staking-info)) u100)
+  )
+)
