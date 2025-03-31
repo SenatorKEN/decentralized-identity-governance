@@ -228,3 +228,24 @@
 (define-data-var emergency-mode bool false)
 (define-data-var guardian-multisig-threshold uint u3) ;; Require 3 guardians for emergency actions
 (define-data-var oracle-update-frequency uint u144) ;; Update every ~24 hours (assuming 10 min blocks)
+
+;; Enhanced identity structure with biometric verification and recovery options
+(define-map enhanced-identity-details
+  principal
+  {
+    biometric-hash: (optional (buff 64)),
+    recovery-contacts: (list 3 principal),
+    last-verification-date: uint,
+    risk-score: uint,
+    identity-metadata: (list 10 {
+      meta-key: (string-utf8 30),
+      meta-value: (string-utf8 100),
+      is-public: bool
+    }),
+    compliance-status: {
+      last-check: uint,
+      status-code: uint,
+      jurisdiction: (string-utf8 30)
+    }
+  }
+)
