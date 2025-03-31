@@ -346,5 +346,22 @@
   }
 )
 
+;; Protocol upgrade proposals with more detailed implementation stages
+(define-map protocol-upgrades
+  uint
+  {
+    proposal-id: uint,
+    code-repository: (string-utf8 200),
+    commit-hash: (buff 32),
+    security-audit-status: (string-utf8 30),
+    implementation-stages: (list 5 {
+      stage-name: (string-utf8 50),
+      status: (string-utf8 20),
+      target-block-height: uint
+    }),
+    backward-compatible: bool,
+    emergency-level: uint
+  }
+)
 
 
