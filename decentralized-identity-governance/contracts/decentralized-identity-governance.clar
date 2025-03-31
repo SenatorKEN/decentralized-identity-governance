@@ -263,3 +263,29 @@
     revocable: bool
   }
 )
+
+;; Multi-signature control
+(define-map multisig-requirements
+  (string-utf8 30) ;; action type
+  {
+    required-signers: uint,
+    authorized-signers: (list 10 principal),
+    timelock-blocks: uint
+  }
+)
+
+
+;; Pending multisig transactions
+(define-map pending-multisig-txs
+  uint ;; transaction-id
+  {
+    action-type: (string-utf8 30),
+    initiator: principal,
+    signers: (list 10 principal),
+    params: (list 5 {
+      param-name: (string-utf8 30),
+      param-value: (string-utf8 100)
+    }),
+    expiration-height: uint
+  }
+)
